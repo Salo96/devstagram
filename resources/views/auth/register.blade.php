@@ -12,7 +12,7 @@
         </div>
 
         <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
-            <form action={{ route('register') }} method="POST">
+            <form action={{ route('register') }} method="POST" novalidate>
                 @csrf
                 <div class="mb-5">
                     <label for="name" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -49,7 +49,7 @@
                         type="text"
                         placeholder="Tu Nombre de usuario"
                         class="border p-3 w-full rounded-lg
-                        @error('name')
+                        @error('username')
                          border-red-500
                         @enderror
                         "
@@ -73,7 +73,7 @@
                         type="email"
                         placeholder="Tu email de registro"
                         class="border p-3 w-full rounded-lg
-                            @error('name')
+                            @error('email')
                             border-red-500
                             @enderror                        
                         "
@@ -89,7 +89,7 @@
                 
                 <div class="mb-5">
                     <label for="password" class="mb-2 block uppercase text-gray-500 font-bold">
-                        UserName 
+                        password
                     </label>
 
                     <input 
@@ -98,11 +98,11 @@
                         type="password"
                         placeholder="Password"
                         class="border p-3 w-full rounded-lg
-                            @error('name')
+                            @error('password')
                             border-red-500
                             @enderror
                         "
-                        value={{ old('password') }}
+                     
                     >
                     @error('password')
                         <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
@@ -121,18 +121,10 @@
                         name="password_confirmation"
                         type="password"
                         placeholder="Repite tu Password"
-                        class="border p-3 w-full rounded-lg
-                            @error('name')
-                            border-red-500
-                            @enderror
-                        "
-                        value={{ old('password_confirmation') }}
+                        class="border p-3 w-full rounded-lg"
+                      
                     >
-                    @error('password_confirmation')
-                        <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                            {{ $message }}
-                        </p>
-                    @enderror
+
                 </div>
 
                 <input type="submit" value="Crear Cuenta" 
