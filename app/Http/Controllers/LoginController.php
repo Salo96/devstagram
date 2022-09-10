@@ -11,12 +11,19 @@ class LoginController extends Controller
     }
 
     public function store(Request $r){
+
+        
+        // dd($r->remember);
+
         $this->validate( $r,[
             'email' => 'required|email|max:60',
             'password' => 'required',
         ]);
 
-        if(!auth()->attempt($r->only('email', 'password'))){
+        $remember = $r->remember;
+
+
+        if(!auth()->attempt($r->only('email', 'password'), $remember)){
             return back()->with('msg', 'credenciales incorrecta');
         }
 

@@ -14,11 +14,36 @@
             <h1 class="text-3xl font-black">
                 DevStagram
             </h1>
-            <nav class="flex gap-2">
-                <a class="font-bold uppercase text-gray-600" href="#">Login</a>
-                <a class="font-bold uppercase text-gray-600" href="{{ route('register') }}">Crear Cuenta</a>
 
-            </nav>
+            {{-- autenticado --}}
+            @auth
+                <nav class="flex gap-2">
+                    <a class="font-normal">
+                        Hola:
+                        <span class="font-bold uppercase text-gray-600">
+                            {{ auth()->user()->username }}
+                        </span>
+                    </a>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="font-bold uppercase text-gray-600">
+                            Cerrar Sesion
+                        </button>
+                    </form>
+
+                </nav> 
+            @endauth
+
+            {{-- no autenticado --}}
+            @guest
+                <nav class="flex gap-2">
+                    <a class="font-bold uppercase text-gray-600" href="{{ route('login') }}">Login</a>
+                    <a class="font-bold uppercase text-gray-600" href="{{ route('register') }}">Crear Cuenta</a>
+
+                </nav>       
+            @endguest
+
         </div>
     </header>
 

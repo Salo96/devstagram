@@ -68,6 +68,12 @@
                             {{ $message }}
                         </p>
                     @enderror
+
+                    <div class="mt-5">
+                        <input type="checkbox" name="remember" id=""> 
+                        <label class="text-gray-500 font-bold">Mantener mi sesión abierta</label>
+                    </div>
+
                 </div>
 
 
