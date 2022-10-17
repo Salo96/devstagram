@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -23,4 +24,21 @@ class PostController extends Controller
     public function create(){
         return view('posts.create');
     }
+
+    public function store( ){
+        $rules = [
+            'titulo' => 'required|max:255',
+            'descripcion' => 'required',
+            'imagen' => 'required',
+            'user_id' => 'required'
+        ];
+
+        request()->validate(  $rules );
+
+        Post::create(request()->all());
+
+        return redirect()->route('posts.index', auth()->user()->username);
+    }
+
+
 }

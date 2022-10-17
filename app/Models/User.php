@@ -42,4 +42,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function posts(){
+        //one to many
+        // un usuario pertenece a MUCHO post usuario -> post
+        return $this->hasMany(Post::class);
+    }
 }
