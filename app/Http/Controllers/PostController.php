@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     //el usuario debe estar autenticado
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show', 'index']);
     }
 
     public function index( User $user ){
@@ -51,6 +51,22 @@ class PostController extends Controller
             'post' => $post,
             'user' =>$user
         ]);
+    }
+
+    public function destroy(Post $post){
+        // dd('eliminando', $post->id);
+        // if($post->user_id === auth()->user()->id){
+        //     $post->delete();
+        //     return redirect()->route('posts.index', auth()->user()->username);
+        // }else{
+        //     return;
+        // }
+
+        //viene del policy para tener la logica ahi, si es el post del usuario
+        $this->authorize('delete', $post);
+        $post->delete();
+        return redirect()->route('posts.index', auth()->user()->username);
+       
     }
 
 
