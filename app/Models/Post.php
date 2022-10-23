@@ -25,4 +25,15 @@ class Post extends Model
         // un post tiene muchos comentarios post ->comentarios
         return $this->hasMany(Comentario::class);
     }
+
+    public function likes(){
+        // un post tiene muchos like post ->like
+        return $this->hasMany(Like::class);
+    }
+
+    public function checkLike(User $user){
+        //likes -> posicionarse la tabla de like
+        //contains -> contiene en la columna user_id contiene este usuario user->id de este post
+        return $this->likes->contains('user_id', $user->id);
+    }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -61,6 +62,13 @@ class PostController extends Controller
         // }else{
         //     return;
         // }
+
+        //eliminar la img
+        $img_path = public_path('uploads/' . $post->imagen);
+
+        if(File::exists($img_path)){
+            unlink($img_path);
+        }
 
         //viene del policy para tener la logica ahi, si es el post del usuario
         $this->authorize('delete', $post);
