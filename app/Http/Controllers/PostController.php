@@ -18,8 +18,8 @@ class PostController extends Controller
 
 
         // dd($user->id);
-
-        $posts = Post::where('user_id', $user->id)->paginate(10);
+        //lastest ordena de forma ascendente
+        $posts = Post::where('user_id', $user->id)->latest()->paginate(10);
         // dd($posts);
 
         return view('dashboard',[
